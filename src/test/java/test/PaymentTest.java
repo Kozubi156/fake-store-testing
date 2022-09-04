@@ -1,23 +1,20 @@
-package tests;
+package test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.MethodSource;
 import page_objects.CartPage;
 import page_objects.CheckoutPage;
 import page_objects.MyAccountPage;
 import page_objects.OrderReceivedPage;
 import page_objects.ProductPage;
 
-public class PaymentTests extends BaseTest {
+public class PaymentTest extends BaseTest {
     boolean isMarkTermsAndCondition = true;
 
     @Test
     public void shouldBuyWithoutCreateAccountTest() {
-
         ProductPage productPage = new ProductPage(driver)
                 .gotTo(configuration.getBaseUrl() + testData.getProduct().getUrl());
         productPage.demoNotice.closeDemoNotice();
@@ -109,10 +106,12 @@ public class PaymentTests extends BaseTest {
         assertTrue(isOrderSuccessful, "Order successful message wasn't found.");
     }
 
-    @Test
-    @ParameterizedTest(name = "Customer field validation check: {1}")
-    @MethodSource({"test_data.CustomerAndCreditCardData#customerTestData"})
-    public void shouldDisplayCustomerDataFieldValidationTest() {
-        // TODO: Add steps;
-    }
+//    @Test
+//    @ParameterizedTest(name = "Customer field validation check: {1}")
+//    @MethodSource({"test_data.CustomerAndCreditCardData#customerTestData"})
+//    public void shouldDisplayCustomerDataFieldValidationTest() {
+//        // TODO: Add steps;
+//    }
+
+    // TODO: add test case to verify order details: price, customer data etc.;
 }

@@ -44,162 +44,162 @@ public class ShoppingCartTests extends BaseTest {
                 .click();
     }
 
-    @Test
-    public void shouldAddProductFromProductDetailsPageTest() {
-        openProductDetailsPage(firstProductDetails);
-        addProductToCart();
-        viewCart(productDetailsViewCartLink);
-        assertAll(
-                () -> assertTrue(
-                        productIsDisplayed(firstProductId), "Product has not found in the cart: " + firstProductId),
-                () -> assertEquals(orderedProductNumber, getNumberOfProduct(), msgWrongProductsNumber),
-                () -> assertEquals(
-                        expectedProductNumber, getNumberOfProductToOrder().size()),
-                assertProductPriceAndSubtotal(firstProductDetails, orderedProductNumber, expectedFirstProductPrice),
-                () -> assertEquals(
-                        calculateExpectedProductsTotalAmount(calculateExpectedProductSubTotalAmount(
-                                calculateExpectedProductPrice(expectedFirstProductPrice), orderedProductNumber)),
-                        getOrderTotal(),
-                        msgIncorrectTotalAmount));
-    }
-
-    @Test
-    public void shouldAddProductFromCategoryPageTest() {
-        gotToFirstCategory();
-        addProductToCart(firstProductId);
-        viewCart(productViewCartButton);
-        assertAll(
-                () -> assertTrue(productIsDisplayed(firstProductId)),
-                () -> assertEquals(orderedProductNumber, getNumberOfProduct(), msgWrongProductsNumber),
-                () -> assertEquals(
-                        expectedProductNumber, getNumberOfProductToOrder().size(), msgWrongProductsNumber),
-                assertProductPriceAndSubtotal(firstProductDetails, orderedProductNumber, expectedFirstProductPrice),
-                () -> assertEquals(
-                        calculateExpectedProductsTotalAmount(calculateExpectedProductSubTotalAmount(
-                                calculateExpectedProductPrice(expectedFirstProductPrice), orderedProductNumber)),
-                        getOrderTotal(),
-                        msgIncorrectTotalAmount));
-    }
-
-    @Test
-    public void shouldAddOneProductFewTimesFromProductsDetailsTest() {
-        openProductDetailsPage(firstProductDetails);
-        addProductToCart(numberOfFirstProductToOrder);
-        viewCart(productDetailsViewCartLink);
-        assertAll(
-                () -> assertEquals(numberOfFirstProductToOrder, getNumberOfProduct(), msgWrongProductsNumber),
-                assertProductPriceAndSubtotal(
-                        firstProductDetails, numberOfFirstProductToOrder, expectedFirstProductPrice),
-                () -> assertEquals(
-                        calculateExpectedProductsTotalAmount(calculateExpectedProductSubTotalAmount(
-                                calculateExpectedProductPrice(expectedFirstProductPrice), numberOfFirstProductToOrder)),
-                        getOrderTotal(),
-                        msgIncorrectTotalAmount));
-    }
-
-    @Test
-    public void shouldAddFewOfTwoProductsTest() {
-        openProductDetailsPage(firstProductDetails);
-        addProductToCart(numberOfFirstProductToOrder);
-        driver.navigate().to(mainPageUrl);
-        openProductDetailsPage(secondProductDetails);
-        addProductToCart(numberOfSecondProductToOrder);
-        viewCart(productDetailsViewCartLink);
-        assertAll(
-                () -> assertEquals(
-                        numberOfFirstProductToOrder,
-                        getNumberOfProductInCart(getProductId(firstProductDetails)),
-                        msgWrongProductsNumber),
-                () -> assertEquals(
-                        numberOfSecondProductToOrder,
-                        getNumberOfProductInCart(getProductId(secondProductDetails)),
-                        msgWrongProductsNumber),
-                assertProductPriceAndSubtotal(
-                        firstProductDetails, numberOfFirstProductToOrder, expectedFirstProductPrice),
-                assertProductPriceAndSubtotal(
-                        secondProductDetails, numberOfSecondProductToOrder, expectedSecondProductPrice),
-                () -> assertEquals(
-                        calculateExpectedProductsTotalAmount(
-                                calculateExpectedProductSubTotalAmount(
-                                        calculateExpectedProductPrice(expectedFirstProductPrice),
-                                        numberOfFirstProductToOrder),
-                                (calculateExpectedProductSubTotalAmount(
-                                        calculateExpectedProductPrice(expectedSecondProductPrice),
-                                        numberOfSecondProductToOrder))),
-                        getOrderTotal(),
-                        msgIncorrectTotalAmount));
-    }
-
-    @Test
-    public void shouldAddFewVariousProductsTest() {
-        List<String> addedTours = addFewProductsToCart(products);
-        viewCart(productDetailsViewCartLink);
-        assertEquals(addedTours, getProductLink(productCartLink), msgWrongProductsNumber);
-    }
-
-    @Test
-    public void shouldChangeNumberOfCartItemsTest() {
-        expectedMessage = "Koszyk zaktualizowany.";
-
-        addProductToCart(firstProductId);
-        viewCart(productViewCartButton);
-        changeNumberCartItems(numberOfFirstProductToOrder);
-        assertAll(
-                () -> assertEquals(expectedMessage, getMessageText(messageBar), msgIncorrectErrorText),
-                () -> assertEquals(numberOfFirstProductToOrder, getNumberOfProduct(), msgWrongProductsNumber),
-                assertProductPriceAndSubtotal(
-                        firstProductDetails, numberOfFirstProductToOrder, expectedFirstProductPrice),
-                () -> assertEquals(
-                        calculateExpectedProductSubTotalAmount(
-                                getProductPriceFromCart(getProductId(firstProductDetails)),
-                                numberOfFirstProductToOrder),
-                        getOrderTotal(),
-                        msgIncorrectTotalAmount));
-    }
-
-    @Test
-    public void shouldRemoveProductFromBasketTest() {
-        String tourTitle = "Wyspy Zielonego Przylądka - Sal";
-        expectedMessage = "Twój koszyk jest pusty.";
-
-        openProductDetailsPage(firstProductDetails);
-        addProductToCart();
-        viewCart(productDetailsViewCartLink);
-        WebElement btnRemove = driver.findElement(firstProductId);
-        btnRemove.click();
-        waitForInformationMessageBar(messageBar);
-        assertAll(
-                () -> assertEquals(
-                        "Usunięto: „" + tourTitle + "“. Cofnij?", getMessageText(messageBar), msgIncorrectErrorText),
-                () -> assertEquals(expectedMessage, getMessageText(infoBar), msgIncorrectErrorText),
-                () -> assertFalse(isElementDisplayed(firstProductId), "Product was not " + "removed from cart"));
-    }
-
-    @Test
-    public void shouldRemoveOneOfTwoProductsFromBasketTest() {
-        String tourTitle = "Wyspy Zielonego Przylądka - Sal";
-        expectedMessage = "Twój koszyk jest pusty.";
-
-        // TODO:       addFewProductsToCart(2); do może dopisania
-        openProductDetailsPage(firstProductDetails);
-        addProductToCart();
-        openProductDetailsPage(secondProductDetails);
-        addProductToCart();
-        viewCart(productDetailsViewCartLink);
-        WebElement btnRemove = driver.findElement(firstProductId);
-        btnRemove.click();
-        waitForInformationMessageBar(messageBar);
-        assertAll(
-                () -> assertEquals(
-                        "Usunięto: „" + tourTitle + "“. Cofnij?", getMessageText(messageBar), msgIncorrectErrorText),
-                () -> assertFalse(
-                        isElementDisplayed(infoBar),
-                        "Incorrect information" + " " + "was " + "displayed: " + expectedMessage),
-                () -> assertFalse(isElementDisplayed(firstProductId), "Product was " + "not removed from cart"),
-                () -> assertTrue(
-                        isElementDisplayed(secondProductId),
-                        "Second tour " + "added to" + " cart is not " + "displayed"));
-    }
+//    @Test
+//    public void shouldAddProductFromProductDetailsPageTest() {
+//        openProductDetailsPage(firstProductDetails);
+//        addProductToCart();
+//        viewCart(productDetailsViewCartLink);
+//        assertAll(
+//                () -> assertTrue(
+//                        productIsDisplayed(firstProductId), "Product has not found in the cart: " + firstProductId),
+//                () -> assertEquals(orderedProductNumber, getNumberOfProduct(), msgWrongProductsNumber),
+//                () -> assertEquals(
+//                        expectedProductNumber, getNumberOfProductToOrder().size()),
+//                assertProductPriceAndSubtotal(firstProductDetails, orderedProductNumber, expectedFirstProductPrice),
+//                () -> assertEquals(
+//                        calculateExpectedProductsTotalAmount(calculateExpectedProductSubTotalAmount(
+//                                calculateExpectedProductPrice(expectedFirstProductPrice), orderedProductNumber)),
+//                        getOrderTotal(),
+//                        msgIncorrectTotalAmount));
+//    }
+//
+//    @Test
+//    public void shouldAddProductFromCategoryPageTest() {
+//        gotToFirstCategory();
+//        addProductToCart(firstProductId);
+//        viewCart(productViewCartButton);
+//        assertAll(
+//                () -> assertTrue(productIsDisplayed(firstProductId)),
+//                () -> assertEquals(orderedProductNumber, getNumberOfProduct(), msgWrongProductsNumber),
+//                () -> assertEquals(
+//                        expectedProductNumber, getNumberOfProductToOrder().size(), msgWrongProductsNumber),
+//                assertProductPriceAndSubtotal(firstProductDetails, orderedProductNumber, expectedFirstProductPrice),
+//                () -> assertEquals(
+//                        calculateExpectedProductsTotalAmount(calculateExpectedProductSubTotalAmount(
+//                                calculateExpectedProductPrice(expectedFirstProductPrice), orderedProductNumber)),
+//                        getOrderTotal(),
+//                        msgIncorrectTotalAmount));
+//    }
+//
+//    @Test
+//    public void shouldAddOneProductFewTimesFromProductsDetailsTest() {
+//        openProductDetailsPage(firstProductDetails);
+//        addProductToCart(numberOfFirstProductToOrder);
+//        viewCart(productDetailsViewCartLink);
+//        assertAll(
+//                () -> assertEquals(numberOfFirstProductToOrder, getNumberOfProduct(), msgWrongProductsNumber),
+//                assertProductPriceAndSubtotal(
+//                        firstProductDetails, numberOfFirstProductToOrder, expectedFirstProductPrice),
+//                () -> assertEquals(
+//                        calculateExpectedProductsTotalAmount(calculateExpectedProductSubTotalAmount(
+//                                calculateExpectedProductPrice(expectedFirstProductPrice), numberOfFirstProductToOrder)),
+//                        getOrderTotal(),
+//                        msgIncorrectTotalAmount));
+//    }
+//
+//    @Test
+//    public void shouldAddFewOfTwoProductsTest() {
+//        openProductDetailsPage(firstProductDetails);
+//        addProductToCart(numberOfFirstProductToOrder);
+//        driver.navigate().to(mainPageUrl);
+//        openProductDetailsPage(secondProductDetails);
+//        addProductToCart(numberOfSecondProductToOrder);
+//        viewCart(productDetailsViewCartLink);
+//        assertAll(
+//                () -> assertEquals(
+//                        numberOfFirstProductToOrder,
+//                        getNumberOfProductInCart(getProductId(firstProductDetails)),
+//                        msgWrongProductsNumber),
+//                () -> assertEquals(
+//                        numberOfSecondProductToOrder,
+//                        getNumberOfProductInCart(getProductId(secondProductDetails)),
+//                        msgWrongProductsNumber),
+//                assertProductPriceAndSubtotal(
+//                        firstProductDetails, numberOfFirstProductToOrder, expectedFirstProductPrice),
+//                assertProductPriceAndSubtotal(
+//                        secondProductDetails, numberOfSecondProductToOrder, expectedSecondProductPrice),
+//                () -> assertEquals(
+//                        calculateExpectedProductsTotalAmount(
+//                                calculateExpectedProductSubTotalAmount(
+//                                        calculateExpectedProductPrice(expectedFirstProductPrice),
+//                                        numberOfFirstProductToOrder),
+//                                (calculateExpectedProductSubTotalAmount(
+//                                        calculateExpectedProductPrice(expectedSecondProductPrice),
+//                                        numberOfSecondProductToOrder))),
+//                        getOrderTotal(),
+//                        msgIncorrectTotalAmount));
+//    }
+//
+//    @Test
+//    public void shouldAddFewVariousProductsTest() {
+//        List<String> addedTours = addFewProductsToCart(products);
+//        viewCart(productDetailsViewCartLink);
+//        assertEquals(addedTours, getProductLink(productCartLink), msgWrongProductsNumber);
+//    }
+//
+//    @Test
+//    public void shouldChangeNumberOfCartItemsTest() {
+//        expectedMessage = "Koszyk zaktualizowany.";
+//
+//        addProductToCart(firstProductId);
+//        viewCart(productViewCartButton);
+//        changeNumberCartItems(numberOfFirstProductToOrder);
+//        assertAll(
+//                () -> assertEquals(expectedMessage, getMessageText(messageBar), msgIncorrectErrorText),
+//                () -> assertEquals(numberOfFirstProductToOrder, getNumberOfProduct(), msgWrongProductsNumber),
+//                assertProductPriceAndSubtotal(
+//                        firstProductDetails, numberOfFirstProductToOrder, expectedFirstProductPrice),
+//                () -> assertEquals(
+//                        calculateExpectedProductSubTotalAmount(
+//                                getProductPriceFromCart(getProductId(firstProductDetails)),
+//                                numberOfFirstProductToOrder),
+//                        getOrderTotal(),
+//                        msgIncorrectTotalAmount));
+//    }
+//
+//    @Test
+//    public void shouldRemoveProductFromBasketTest() {
+//        String tourTitle = "Wyspy Zielonego Przylądka - Sal";
+//        expectedMessage = "Twój koszyk jest pusty.";
+//
+//        openProductDetailsPage(firstProductDetails);
+//        addProductToCart();
+//        viewCart(productDetailsViewCartLink);
+//        WebElement btnRemove = driver.findElement(firstProductId);
+//        btnRemove.click();
+//        waitForInformationMessageBar(messageBar);
+//        assertAll(
+//                () -> assertEquals(
+//                        "Usunięto: „" + tourTitle + "“. Cofnij?", getMessageText(messageBar), msgIncorrectErrorText),
+//                () -> assertEquals(expectedMessage, getMessageText(infoBar), msgIncorrectErrorText),
+//                () -> assertFalse(isElementDisplayed(firstProductId), "Product was not " + "removed from cart"));
+//    }
+//
+//    @Test
+//    public void shouldRemoveOneOfTwoProductsFromBasketTest() {
+//        String tourTitle = "Wyspy Zielonego Przylądka - Sal";
+//        expectedMessage = "Twój koszyk jest pusty.";
+//
+//        // TODO:       addFewProductsToCart(2); do może dopisania
+//        openProductDetailsPage(firstProductDetails);
+//        addProductToCart();
+//        openProductDetailsPage(secondProductDetails);
+//        addProductToCart();
+//        viewCart(productDetailsViewCartLink);
+//        WebElement btnRemove = driver.findElement(firstProductId);
+//        btnRemove.click();
+//        waitForInformationMessageBar(messageBar);
+//        assertAll(
+//                () -> assertEquals(
+//                        "Usunięto: „" + tourTitle + "“. Cofnij?", getMessageText(messageBar), msgIncorrectErrorText),
+//                () -> assertFalse(
+//                        isElementDisplayed(infoBar),
+//                        "Incorrect information" + " " + "was " + "displayed: " + expectedMessage),
+//                () -> assertFalse(isElementDisplayed(firstProductId), "Product was " + "not removed from cart"),
+//                () -> assertTrue(
+//                        isElementDisplayed(secondProductId),
+//                        "Second tour " + "added to" + " cart is not " + "displayed"));
+//    }
 
     private void changeNumberCartItems(int items) {
         changeNumberOfProduct(items);

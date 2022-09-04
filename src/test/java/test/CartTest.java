@@ -1,4 +1,4 @@
-package tests;
+package test;
 
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 import page_objects.CartPage;
 import page_objects.HomePage;
 import page_objects.ProductPage;
+import test.BaseTest;
 
 public class CartTest extends BaseTest {
     private int expectedNumberOfProducts = 1;

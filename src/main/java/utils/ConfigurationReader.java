@@ -7,6 +7,8 @@ public class ConfigurationReader extends FileReader {
     private String hubUrl;
     private String browser;
 
+    private boolean isRemote;
+
     public ConfigurationReader(String configurationLocation) {
         super(configurationLocation);
         this.configurationLocation = configurationLocation;
@@ -16,6 +18,7 @@ public class ConfigurationReader extends FileReader {
         hubUrl = properties.getProperty("hubUrl");
         baseUrl = properties.getProperty("baseUrl");
         browser = properties.getProperty("browser");
+        isRemote = Boolean.parseBoolean(properties.getProperty("isRemote"));
     }
 
     public String getBrowser() {
@@ -24,6 +27,10 @@ public class ConfigurationReader extends FileReader {
 
     public String getHubUrl() {
         return hubUrl;
+    }
+
+    public boolean isRemote() {
+        return isRemote;
     }
 
     public String getBaseUrl() {
