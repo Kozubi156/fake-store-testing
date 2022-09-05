@@ -5,6 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import io.qameta.allure.Description;
+import io.qameta.allure.Severity;
+import io.qameta.allure.SeverityLevel;
 import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -17,6 +19,7 @@ public class CartTest extends BaseTest {
     private int expectedNumberOfProducts = 1;
 
     @Test
+    @Severity(SeverityLevel.BLOCKER)
     @Description("Add a product to cart from product details page")
     public void shouldAddProductToCartTest() {
         HomePage homePage = new HomePage(driver).goToHomePage();
@@ -32,6 +35,7 @@ public class CartTest extends BaseTest {
     }
 
     @Test
+    @Severity(SeverityLevel.NORMAL)
     @Description("Add a product to cart from category page")
     public void shouldAddProductFromCategoryPageTest() {
         HomePage homePage = new HomePage(driver).goToHomePage();
@@ -54,6 +58,7 @@ public class CartTest extends BaseTest {
     }
 
     @Test
+    @Severity(SeverityLevel.NORMAL)
     @Description("Add same product to cart a few times")
     public void shouldAddOneProductFewTimesTest() {
         HomePage homePage = new HomePage(driver).goToHomePage();
@@ -79,6 +84,7 @@ public class CartTest extends BaseTest {
     }
 
     @Test
+    @Severity(SeverityLevel.CRITICAL)
     @Description("Add few various products to cart")
     public void shouldAddFewVariousProductsTest() {
         int numberOfProducts = 10;
@@ -96,6 +102,7 @@ public class CartTest extends BaseTest {
     }
 
     @Test
+    @Severity(SeverityLevel.CRITICAL)
     @Description("Change number of added products to cart")
     public void shouldChangeNumberOfProductsTest() {
         HomePage homePage = new HomePage(driver).goToHomePage();
@@ -118,6 +125,7 @@ public class CartTest extends BaseTest {
     }
 
     @Test
+    @Severity(SeverityLevel.CRITICAL)
     @Description("Remove added product from cart")
     public void shouldRemoveProductFromCartTest() {
         HomePage homePage = new HomePage(driver).goToHomePage();

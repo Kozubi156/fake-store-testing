@@ -3,6 +3,9 @@ package test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import io.qameta.allure.Severity;
+import io.qameta.allure.SeverityLevel;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import page_objects.CartPage;
@@ -16,6 +19,7 @@ public class PaymentTest extends BaseTest {
     boolean isMarkTermsAndCondition = true;
 
     @Test
+    @Severity(SeverityLevel.BLOCKER)
     public void shouldBuyWithoutCreateAccountTest() {
         ProductPage productPage = new ProductPage(driver)
                 .gotTo(configuration.getBaseUrl() + testData.getProduct().getUrl());
@@ -43,6 +47,8 @@ public class PaymentTest extends BaseTest {
     }
 
     @Test
+    @Disabled
+    @Severity(SeverityLevel.CRITICAL)
     public void shouldCreateAccountDuringPaymentTest() {
         ProductPage productPage = new ProductPage(driver)
                 .gotTo(configuration.getBaseUrl() + testData.getProduct().getUrl());
@@ -86,6 +92,7 @@ public class PaymentTest extends BaseTest {
     }
 
     @Test
+    @Severity(SeverityLevel.CRITICAL)
     public void shouldLoginAndPurchaseTest() {
         ProductPage productPage = new ProductPage(driver)
                 .gotTo(configuration.getBaseUrl() + testData.getProduct().getUrl());
