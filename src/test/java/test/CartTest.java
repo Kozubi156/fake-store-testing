@@ -58,7 +58,7 @@ public class CartTest extends BaseTest {
     }
 
     @Test
-    @Severity(SeverityLevel.NORMAL)
+    @Severity(SeverityLevel.CRITICAL)
     @Description("Add same product to cart a few times")
     public void shouldAddOneProductFewTimesTest() {
         HomePage homePage = new HomePage(driver).goToHomePage();

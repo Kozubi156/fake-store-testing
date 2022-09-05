@@ -92,7 +92,7 @@ public class PaymentTest extends BaseTest {
     }
 
     @Test
-    @Severity(SeverityLevel.CRITICAL)
+    @Severity(SeverityLevel.BLOCKER)
     public void shouldLoginAndPurchaseTest() {
         ProductPage productPage = new ProductPage(driver)
                 .gotTo(configuration.getBaseUrl() + testData.getProduct().getUrl());
