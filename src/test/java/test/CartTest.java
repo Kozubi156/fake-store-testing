@@ -4,65 +4,82 @@ import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import io.qameta.allure.Description;
 import java.util.List;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import page_objects.CartPage;
 import page_objects.HomePage;
 import page_objects.ProductPage;
-import test.BaseTest;
 
+@DisplayName("Cart Tests")
 public class CartTest extends BaseTest {
     private int expectedNumberOfProducts = 1;
 
     @Test
+    @Description("Add a product to cart from product details page")
     public void shouldAddProductToCartTest() {
         HomePage homePage = new HomePage(driver).goToHomePage();
         homePage.demoNotice.closeDemoNotice();
 
-        boolean isProductInCart =
-                homePage.goToProduct(testData.getProduct().getId()).addToCart().viewCart().isProductInCart(testData.getProduct().getId());
-        assertTrue(isProductInCart, "A product with id: " + testData.getProduct().getId() + " has not been found in the cart");
+        boolean isProductInCart = homePage.goToProduct(testData.getProduct().getId())
+                .addToCart()
+                .viewCart()
+                .isProductInCart(testData.getProduct().getId());
+        assertTrue(
+                isProductInCart,
+                "A product with id: " + testData.getProduct().getId() + " has not been found in the cart");
     }
 
     @Test
+    @Description("Add a product to cart from category")
     public void shouldAddProductFromCategoryPageTest() {
         HomePage homePage = new HomePage(driver).goToHomePage();
         homePage.demoNotice.closeDemoNotice();
 
-        CartPage cartPage =
-                homePage.goToCategory(testData.getCategoryName()).addToCart(testData.getProduct().getId()).viewCart();
+        CartPage cartPage = homePage.goToCategory(testData.getCategoryName())
+                .addToCart(testData.getProduct().getId())
+                .viewCart();
 
-        boolean productQuantityInCart = cartPage.isProductInCart(testData.getProduct().getId());
+        boolean productQuantityInCart =
+                cartPage.isProductInCart(testData.getProduct().getId());
         int productsNumberInCart = cartPage.getProductsNumber();
 
         assertAll(
                 () -> assertTrue(
-                        productQuantityInCart, "A product with id: " + testData.getProduct().getId() + " has not been found in the cart"),
+                        productQuantityInCart,
+                        "A product with id: " + testData.getProduct().getId() + " has not been found in the cart"),
                 () -> assertEquals(
                         expectedNumberOfProducts, productsNumberInCart, "Wrong number of product is in the cart"));
     }
 
     @Test
+    @Description("Add same product to cart a few times")
     public void shouldAddOneProductFewTimesTest() {
         HomePage homePage = new HomePage(driver).goToHomePage();
         homePage.demoNotice.closeDemoNotice();
 
         int quantity = 10;
-        CartPage cartPage = homePage.goToProduct(testData.getProduct().getId()).addToCart(quantity).viewCart();
+        CartPage cartPage = homePage.goToProduct(testData.getProduct().getId())
+                .addToCart(quantity)
+                .viewCart();
 
-        int productQuantityInCart = cartPage.getProductQuantity(testData.getProduct().getId());
+        int productQuantityInCart =
+                cartPage.getProductQuantity(testData.getProduct().getId());
         int productsNumberInCart = cartPage.getProductsNumber();
 
         assertAll(
                 () -> assertEquals(
                         quantity,
                         productQuantityInCart,
-                        "The cart contains incorrect quantity of product id: " + testData.getProduct().getId()),
+                        "The cart contains incorrect quantity of product id: "
+                                + testData.getProduct().getId()),
                 () -> assertEquals(
                         expectedNumberOfProducts, productsNumberInCart, "Wrong number of product is in the cart"));
     }
 
     @Test
+    @Description("Add few various products to cart")
     public void shouldAddFewVariousProductsTest() {
         int numberOfProducts = 10;
         HomePage homePage = new HomePage(driver).goToHomePage();
@@ -79,6 +96,7 @@ public class CartTest extends BaseTest {
     }
 
     @Test
+    @Description("Change number of added products to cart")
     public void shouldChangeNumberOfProductsTest() {
         HomePage homePage = new HomePage(driver).goToHomePage();
         homePage.demoNotice.closeDemoNotice();
@@ -95,10 +113,12 @@ public class CartTest extends BaseTest {
         assertEquals(
                 productQuantity,
                 productQuantityInCart,
-                "The cart contains incorrect quantity of product id: " + testData.getProduct().getId());
+                "The cart contains incorrect quantity of product id: "
+                        + testData.getProduct().getId());
     }
 
     @Test
+    @Description("Remove added product from cart")
     public void shouldRemoveProductFromCartTest() {
         HomePage homePage = new HomePage(driver).goToHomePage();
         homePage.demoNotice.closeDemoNotice();

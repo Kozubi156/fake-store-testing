@@ -3,6 +3,7 @@ package test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import page_objects.CartPage;
 import page_objects.CheckoutPage;
@@ -10,6 +11,7 @@ import page_objects.MyAccountPage;
 import page_objects.OrderReceivedPage;
 import page_objects.ProductPage;
 
+@DisplayName("Payment Tests")
 public class PaymentTest extends BaseTest {
     boolean isMarkTermsAndCondition = true;
 
