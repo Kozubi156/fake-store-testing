@@ -32,7 +32,7 @@ public class CartTest extends BaseTest {
     }
 
     @Test
-    @Description("Add a product to cart from category")
+    @Description("Add a product to cart from category page")
     public void shouldAddProductFromCategoryPageTest() {
         HomePage homePage = new HomePage(driver).goToHomePage();
         homePage.demoNotice.closeDemoNotice();
