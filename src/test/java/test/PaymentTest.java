@@ -47,7 +47,6 @@ public class PaymentTest extends BaseTest {
     }
 
     @Test
-    @Disabled
     @Severity(SeverityLevel.CRITICAL)
     public void shouldCreateAccountDuringPaymentTest() {
         ProductPage productPage = new ProductPage(driver)
