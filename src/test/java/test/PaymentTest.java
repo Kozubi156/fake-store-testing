@@ -3,6 +3,7 @@ package test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import io.github.artsok.ParameterizedRepeatedIfExceptionsTest;
 import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
 import org.junit.jupiter.api.Disabled;
@@ -47,7 +48,7 @@ public class PaymentTest extends BaseTest {
     }
 
     @Test
-    @Disabled
+    @ParameterizedRepeatedIfExceptionsTest
     @Severity(SeverityLevel.CRITICAL)
     public void shouldCreateAccountDuringPaymentTest() {
         ProductPage productPage = new ProductPage(driver)
