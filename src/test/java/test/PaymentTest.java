@@ -49,7 +49,7 @@ public class PaymentTest extends BaseTest {
     }
 
     @Test
-    @RepeatedIfExceptionsTest(repeats = 3)
+    @RepeatedIfExceptionsTest(repeats = 2)
     @Severity(SeverityLevel.CRITICAL)
     public void shouldCreateAccountDuringPaymentTest() {
         ProductPage productPage = new ProductPage(driver)
