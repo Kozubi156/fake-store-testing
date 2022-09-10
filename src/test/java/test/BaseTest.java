@@ -1,7 +1,6 @@
 package test;
 
 import drivers.DriverFactory;
-import io.github.bonigarcia.wdm.WebDriverManager;
 import io.qameta.allure.Allure;
 import java.io.File;
 import java.io.IOException;
@@ -21,7 +20,6 @@ import org.junit.jupiter.api.extension.RegisterExtension;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.io.FileHandler;
 import utils.ConfigurationReader;
 import utils.TestDataReader;
@@ -34,6 +32,7 @@ public abstract class BaseTest {
     protected WebDriver driver;
     protected ConfigurationReader configuration;
     protected TestDataReader testData;
+
     @RegisterExtension
     TestStatus status = new TestStatus();
 
@@ -53,7 +52,7 @@ public abstract class BaseTest {
 
     @AfterEach
     public void tearDown(TestInfo info) throws IOException {
-        if(status.isFailed){
+        if (status.isFailed) {
             String path = takeScreenshot(info);
             System.out.println("Test screenshot is available at: " + path);
             addScreenshotToReport(path);
@@ -78,7 +77,7 @@ public abstract class BaseTest {
         return path;
     }
 
-    private void addScreenshotToReport(String path){
+    private void addScreenshotToReport(String path) {
         InputStream stream = null;
         try {
             stream = Files.newInputStream(Paths.get(path));

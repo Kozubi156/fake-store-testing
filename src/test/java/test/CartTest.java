@@ -5,8 +5,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import io.qameta.allure.Description;
+import io.qameta.allure.Issue;
 import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
+import io.qameta.allure.TmsLink;
 import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -21,6 +23,8 @@ public class CartTest extends BaseTest {
     @Test
     @Severity(SeverityLevel.BLOCKER)
     @Description("Add a product to cart from product details page")
+    @Issue("issue-1")
+    @TmsLink("TMS-1")
     public void shouldAddProductToCartTest() {
         HomePage homePage = new HomePage(driver).goToHomePage();
         homePage.demoNotice.closeDemoNotice();

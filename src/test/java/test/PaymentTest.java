@@ -3,11 +3,9 @@ package test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import io.github.artsok.ParameterizedRepeatedIfExceptionsTest;
 import io.github.artsok.RepeatedIfExceptionsTest;
 import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import page_objects.CartPage;
@@ -49,7 +47,7 @@ public class PaymentTest extends BaseTest {
     }
 
     @Test
-    @RepeatedIfExceptionsTest(repeats = 2)
+    @RepeatedIfExceptionsTest(repeats = 1)
     @Severity(SeverityLevel.CRITICAL)
     public void shouldCreateAccountDuringPaymentTest() {
         ProductPage productPage = new ProductPage(driver)
@@ -117,12 +115,12 @@ public class PaymentTest extends BaseTest {
         assertTrue(isOrderSuccessful, "Order successful message wasn't found.");
     }
 
-//    @Test
-//    @ParameterizedTest(name = "Customer field validation check: {1}")
-//    @MethodSource({"test_data.CustomerAndCreditCardData#customerTestData"})
-//    public void shouldDisplayCustomerDataFieldValidationTest() {
-//        // TODO: Add steps;
-//    }
+    //    @Test
+    //    @ParameterizedTest(name = "Customer field validation check: {1}")
+    //    @MethodSource({"test_data.CustomerAndCreditCardData#customerTestData"})
+    //    public void shouldDisplayCustomerDataFieldValidationTest() {
+    //        // TODO: Add steps;
+    //    }
 
     // TODO: add test case to verify order details: price, customer data etc.;
 }
