@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import io.qameta.allure.Description;
 import io.qameta.allure.Issue;
+import io.qameta.allure.Link;
 import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
 import io.qameta.allure.TmsLink;
@@ -18,13 +19,14 @@ import page_objects.ProductPage;
 
 @DisplayName("Cart Tests")
 public class CartTest extends BaseTest {
-    private int expectedNumberOfProducts = 1;
+    private final int expectedNumberOfProducts = 1;
 
     @Test
     @Severity(SeverityLevel.BLOCKER)
     @Description("Add a product to cart from product details page")
     @Issue("issue-1")
     @TmsLink("TMS-1")
+    @Link(name="Google", url="www.google.com", type = "issue")
     public void shouldAddProductToCartTest() {
         HomePage homePage = new HomePage(driver).goToHomePage();
         homePage.demoNotice.closeDemoNotice();
