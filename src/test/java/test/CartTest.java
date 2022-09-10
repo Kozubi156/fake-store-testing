@@ -7,6 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import io.qameta.allure.Description;
 import io.qameta.allure.Issue;
 import io.qameta.allure.Link;
+import io.qameta.allure.Owner;
 import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
 import io.qameta.allure.TmsLink;
@@ -27,6 +28,7 @@ public class CartTest extends BaseTest {
     @Issue("issue-1")
     @TmsLink("TMS-1")
     @Link(name="Google", url="www.google.com", type = "issue")
+    @Owner("Kozubi")
     public void shouldAddProductToCartTest() {
         HomePage homePage = new HomePage(driver).goToHomePage();
         homePage.demoNotice.closeDemoNotice();
